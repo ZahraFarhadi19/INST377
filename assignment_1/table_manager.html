@@ -2,17 +2,36 @@
 <head>
 <!-- CSS -->
 <style type="text/css">
-	div {
-		margin-bottom: 20px;
-	}
+    div {
+        margin-bottom: 20px;
+    }
+    #stat{
+        font-family: "Comic Sans MS", Times, serif;
+        text-align: center;
+    }
+
+    #stat tr:hover td {
+        background-color: orange;
+
+    }
+
+    #org_table th{
+        background-color: green;
+        color: black;
+    }
+
+    #descript{
+        width: 20%;
+    }
 </style>
+
 
 <!-- Data -->
 <script>
 
 // Don't copy this to any other places in this file. You can just use the "organizations" variable to do your assignment. 
 var organizations = [
-	 {
+     {
         "Region": "East Asia & Pacific",
         "Country": "New Zealand",
         "Country Income Level": "High income",
@@ -192,7 +211,7 @@ var organizations = [
         "Type of Data Used": "",
         "profileID": "1687"
     }
-	
+    
 ];
 </script>
 
@@ -200,16 +219,82 @@ var organizations = [
 
 <body>
 <!-- Feel free to add empty tags. Data shouldn't be here. -->
-	<div id="org_table"></div>
+   <title>Organizations Table</title>
+   <h1 align="center">Organizations Table</h1>
+<div id="org_table"> 
+
+</table>     
+    <table border="3">
+        <thead>
+            <tr>
+                <th> Nonprofit Organizations </th>
+                <th> Organizations less than 10 years old </th>
+                <th> North America Organizations </th>
+                <th> Organizations uses Transportaion data </th>
+                <th> Total number of United States </th>
+            </tr>
+        </thead>
+        <tbody id="stat"></tbody>
+    </table>
+</div>
 
 <script>
 // outputs the first item of the organizations array. Just for testing.
 console.log(organizations[0]); 
 
 // Your JavaScript code goes here
+var nProfit = 0;
+var nAmerica = 0;
+var age = 0;
+var transportation = 0;
+var US = 0;
+var table = " ";
 
+//total number of non profit
+for (x in organizations){
+    if(organizations[x]["Organization Type"] == "Nonprofit"){
+        nProfit++;
+    }
+}
+
+//organizations less than 10 years old
+for (x in organizations){
+    if (organizations[x]["Founding Year"] >= 2008){
+        age++;
+    }
+}
+//North America Organizations
+for (x in organizations){
+    if(organizations[x]["Region"] == "North America"){
+        nAmerica++;
+    }
+}
+
+//organizations which use Transportation data
+for (x in organizations){
+    if (organizations[x]["Type of Data Used"].includes("Transportation")){
+        transportation++;
+    }
+}
+
+//Total number of united states organizations
+for (x in organizations){
+    if (organizations[x]["Country"] == "United States"){
+        US++;
+    }
+}
+
+
+
+table += "<tr><td>" + nProfit + "</td><td>" + age +
+            "</td><td>" + nAmerica + "</td><td>" + transportation +
+            "</td><td>" + US + "</td></tr>"  
+
+
+document.getElementById("stat").innerHTML = table;
 
 </script>
+
 
 </body>
 </html>
